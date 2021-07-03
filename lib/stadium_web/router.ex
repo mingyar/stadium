@@ -19,10 +19,13 @@ defmodule StadiumWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", StadiumWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", StadiumWeb do
+     pipe_through :api
+
+     resources "/create", BattleController, only: [:create]
+     resources "/battle", BattleController, only: [:show]
+     resources "/battles", BattleController, only: [:index]
+  end
 
   # Enables LiveDashboard only for development
   #

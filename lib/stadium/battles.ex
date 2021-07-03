@@ -3,6 +3,14 @@ defmodule Stadium.Battles do
   alias Stadium.Battle
   alias Stadium.Repo
 
+  def get_all do
+    Repo.all(Battle)
+  end
+
+  def get_battle(battle_id) do
+    Repo.get(Battle, battle_id)
+  end
+
   def create_battle(params) do
     register_changeset(params)
     |> Repo.insert
