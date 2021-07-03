@@ -1,6 +1,14 @@
 defmodule StadiumWeb.BattleView do
   use StadiumWeb, :view
 
+  def render("create.json", %{battle: battle}) do
+    %{
+      oppenents: "#{battle.pokemon_1} X #{battle.pokemon_2}",
+      the_winner_is: battle.winner,
+      url: StadiumWeb.Endpoint.url <> "/api/battle/#{battle.id}"
+    }
+  end
+
   def render("index.json", %{battles: battles}) do
     %{
       battles: Enum.map(battles, fn(battle) -> battle_json(battle) end)

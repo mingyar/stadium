@@ -1,9 +1,12 @@
 defmodule StadiumWeb.BattleController do
   use StadiumWeb, :controller
   alias Stadium.Battles
+  alias Stadium
 
   def create(conn, _params) do
-
+    battle = Stadium.set_up_battle
+    {:ok, battle} = Battles.create_battle(battle)
+    render(conn, "create.json", battle: battle)
   end
 
   def show(conn, %{"id" => battle_id}) do
