@@ -22,7 +22,7 @@ defmodule StadiumWeb.Router do
   scope "/api", StadiumWeb do
      pipe_through :api
 
-     resources "/create", BattleController, only: [:create]
+     resources "battle/create", BattleController, only: [:create]
      resources "/battle", BattleController, only: [:show]
      resources "/battles", BattleController, only: [:index]
   end

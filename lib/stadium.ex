@@ -28,18 +28,42 @@ defmodule Stadium do
   Set up a Pakemon Battle.
   """
   def set_up_battle do
-    pokemon_1 = get_pokemon_name
-    pokemon_2 = get_pokemon_name
-    winner = who_win([pokemon_1, pokemon_2])
+    prepare_to_battle |> the_winner_is
+  end
 
-    %{pokemon_1: pokemon_1, pokemon_2: pokemon_2, winner: winner}
+  @doc """
+  Set up a Pakemon Battle.
+  """
+  def set_up_battle(pokemon_id_1, pokemon_id_2) do
+    prepare_to_battle(pokemon_id_1, pokemon_id_2) |> the_winner_is
   end
 
   @doc """
   Determine who is the winner.
   """
-  def who_win(pokemons) do
+  defp who_win(pokemons) do
     winner = 0..1 |> Enum.random
     pokemons |> Enum.at(winner)
+  end
+
+  defp the_winner_is(pokemons) do
+    winner = who_win(pokemons)
+
+    %{
+      pokemon_1: Enum.at(pokemons, 0),
+      pokemon_2: Enum.at(pokemons, 1),
+      winner: winner
+    }
+  end
+
+  defp prepare_to_battle do
+    [get_pokemon_name, get_pokemon_name]
+  end
+
+  defp prepare_to_battle(pokemon_id_1, pokemon_id_2) do
+    [
+      Pokedex.get_pokemon(pokemon_id_1),
+      Pokedex.get_pokemon(pokemon_id_2)
+    ]
   end
 end

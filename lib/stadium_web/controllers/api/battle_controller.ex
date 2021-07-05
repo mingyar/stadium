@@ -2,8 +2,13 @@ defmodule StadiumWeb.BattleController do
   use StadiumWeb, :controller
   alias Stadium.Battles
   alias Stadium
-  alias StadiumWeb.ErrorView
-  alias Stadium.Battle
+
+  def create(conn, %{"pokemon_id_1" => pokemon_id_1, "pokemon_id_2" => pokemon_id_2}) do
+    battle = Stadium.set_up_battle(pokemon_id_1, pokemon_id_2)
+    with {:ok, battle} <- Battles.create_battle(battle) do
+      render(conn, "create.json", battle: battle)
+    end
+  end
 
   @doc """
   Ask Stadium to set up a new battle, store the battle and render the new battle created.
