@@ -3,15 +3,19 @@ defmodule StadiumWeb.BattleController do
   alias Stadium.Battles
   alias Stadium
 
+  action_fallback StadiumWeb.FallbackController
+
   def create(conn, _params) do
     battle = Stadium.set_up_battle
-    {:ok, battle} = Battles.create_battle(battle)
-    render(conn, "create.json", battle: battle)
+    with {:ok, battle} <- Battles.create_battle(battle) do
+      render(conn, "create.json", battle: battle)
+    end
   end
 
   def show(conn, %{"id" => battle_id}) do
-    battle = Battles.get_battle(battle_id)
-    render(conn, "show.json", battle: battle)
+    with {battle} <- Battles.get_battle(battle_id) do
+      render(conn, "show.json", battle: battle)
+    end
   end
 
   def index(conn, _params) do
