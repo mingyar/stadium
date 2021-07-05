@@ -1,20 +1,13 @@
-# Stadium
+# Stadium API
 
-To start your Phoenix server:
+### Create a battle with random pokemons:
+https://localhost:4000/api/battle/create
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `npm install` inside the `assets` directory
-  * Start Phoenix endpoint with `mix phx.server`
+### Create a battle with specific pokemons:
+http://localhost:4000/api/battle/create?pokemon_id_1={your-pokemon-id}&pokemon_id_2={your-pokemon-id}
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+### Check a battle result:
+https://localhost:4000/api/battle/{batle_id}
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+### List all battle results:
+http://localhost:4000/api/battles
