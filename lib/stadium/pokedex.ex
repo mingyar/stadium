@@ -1,4 +1,7 @@
 defmodule Stadium.Pokedex do
+  @moduledoc """
+  Responsible to process and manage all data regarding PokeAPI
+  """
   use HTTPoison.Base
 
   @expected_fields ~w(

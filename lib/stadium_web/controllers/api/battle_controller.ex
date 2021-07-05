@@ -2,9 +2,12 @@ defmodule StadiumWeb.BattleController do
   use StadiumWeb, :controller
   alias Stadium.Battles
   alias Stadium
+  alias StadiumWeb.ErrorView
+  alias Stadium.Battle
 
-  action_fallback StadiumWeb.FallbackController
-
+  @doc """
+  Ask Stadium to set up a new battle, store the battle and render the new battle created.
+  """
   def create(conn, _params) do
     battle = Stadium.set_up_battle
     with {:ok, battle} <- Battles.create_battle(battle) do
@@ -12,12 +15,17 @@ defmodule StadiumWeb.BattleController do
     end
   end
 
+  @doc """
+  Ask Battle repository to get the chosen battle by given id and render it.
+  """
   def show(conn, %{"id" => battle_id}) do
-    with {battle} <- Battles.get_battle(battle_id) do
-      render(conn, "show.json", battle: battle)
-    end
+    battle = Battles.get_battle(battle_id)
+    render(conn, "show.json", battle: battle)
   end
 
+  @doc """
+  Ask Battle repository to get all battles to render them.
+  """
   def index(conn, _params) do
     all_battles = Battles.get_all
     render(conn, "index.json", %{battles: all_battles})
