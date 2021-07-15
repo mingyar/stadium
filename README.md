@@ -1,6 +1,6 @@
 # Stadium API
 
-A simple inplamantation using poison to fetch data from the PokeAPI.
+A simple implementation using poison to fetch data from the PokeAPI.
 
 ### Create a battle with random pokemons:
 ````
